@@ -21,8 +21,7 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
     public ChatAdapter(ArrayList<UserOne> list1, ArrayList<UserTwo> list2) {
-        list1.add(new UserOne("test"));
-        list2.add(new UserTwo("test"));
+        
         this.list1 = list1;
         this.list2 = list2;
     }
