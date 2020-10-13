@@ -13,17 +13,19 @@ import java.util.ArrayList;
 
 
 public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    ArrayList<UserOne> list1;
-    ArrayList<UserTwo> list2;
-    String temp;
+    ArrayList<UserText> list;
+    String tempString;
+    Integer tempInteger;
+    UserText tempUserText;
+
     private static final int USER_ONE = 1;
     private static final int USER_TWO = 2;
 
 
-    public ChatAdapter(ArrayList<UserOne> list1, ArrayList<UserTwo> list2) {
-        
-        this.list1 = list1;
-        this.list2 = list2;
+    public ChatAdapter(ArrayList<UserText> list) {
+
+        this.list = list;
+
     }
 
 
@@ -48,16 +50,16 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof ChatViewHolder) {
 
-            UserOne data = list1.get(position);
-            temp = data.toString();
+            UserText data = list.get(position);
+            tempString = data.string;
 
-            ((ChatViewHolder) holder).tv1.setText(temp);
+            ((ChatViewHolder) holder).tv1.setText(tempString);
 
         } else {
 
-            UserTwo data = list2.get(position);
-            temp = data.toString();
-            ((ChatViewHolder2) holder).tv2.setText(temp);
+            UserText data = list.get(position);
+            tempString = data.string;
+            ((ChatViewHolder2) holder).tv2.setText(tempString);
 
         }
     }
@@ -66,7 +68,10 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public int getItemViewType(int position) {
 
-        if (list1.get(position) instanceof UserOne) {
+        tempUserText = list.get(position);
+        tempInteger = tempUserText.num;
+
+        if (tempInteger == 1) {
 
             return USER_ONE;
 
@@ -81,8 +86,7 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        int i = list1.size() + list2.size() + 1;
-        return i;
+        return list.size();
     }
 
     public static class ChatViewHolder extends RecyclerView.ViewHolder {

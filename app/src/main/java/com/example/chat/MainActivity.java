@@ -17,12 +17,10 @@ public class MainActivity extends AppCompatActivity {
 
     EditText et1;
     EditText et2;
-    UserOne text1;
-    UserTwo text2;
-    String temp;
-    ArrayList<UserOne> list1 = new ArrayList<UserOne>();
-    ArrayList<UserTwo> list2 = new ArrayList<UserTwo>();
+    UserText text;
 
+    String temp;
+    ArrayList<UserText> list = new ArrayList<UserText>();
     Button send1;
     Button send2;
     ChatAdapter adapter;
@@ -31,9 +29,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        list1.add(new UserOne("text1"));
-        list2.add(new UserTwo("text2"));
-
 
         et1 = findViewById(R.id.et1);
         et2 = findViewById(R.id.et2);
@@ -45,16 +40,16 @@ public class MainActivity extends AppCompatActivity {
 
         RecyclerView recyclerView =findViewById(R.id.recycler_xml);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new ChatAdapter(list1,list2);
+        adapter = new ChatAdapter(list);
         recyclerView.setAdapter(adapter);
 
         send1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 temp = et1.getText().toString();
-                text1 = new UserOne(temp);
+                text = new UserText(temp,1);
                 et1.getText().clear();
-                list1.add(text1);
+                list.add(text);
                 adapter.notifyDataSetChanged();
             }
         });
@@ -63,9 +58,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 temp = et2.getText().toString();
-                text2 = new UserTwo(temp);
+                text = new UserText(temp,2);
                 et2.getText().clear();
-                list2.add(text2);
+                list.add(text);
                 adapter.notifyDataSetChanged();
 
             }
